@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Weblooks SMS Notification
-Plugin URI: https://github.com/weblooks/sms-notification
+Plugin Name: Weblooks WA Notification
+Plugin URI: https://github.com/lindenbergp/weblooks-wa-notification
 Description: Envia uma notificação SMS para o cliente quando o status do pedido é atualizado.
 Version: 1.1.1
 Author: Weblooks
