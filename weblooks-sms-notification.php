@@ -3,7 +3,7 @@
 Plugin Name: Weblooks WA Notification
 Plugin URI: https://github.com/lindenbergp/weblooks-wa-notification
 Description: Envia uma notificação SMS para o cliente quando o status do pedido é atualizado.
-Version: 1.1.1
+Version: 1.1.2
 Author: Weblooks
 Author URI: https://weblooks.com.br
 License: GPL2
@@ -59,12 +59,20 @@ function weblooks_sms_settings_init() {
         'general',
         'weblooks_sms_settings'
     );
+    add_settings_field(
+        'weblooks_sms_cancelled_message',
+        'Mensagem de SMS Cancelado',
+        'weblooks_sms_cancelled_message_callback',
+        'general',
+        'weblooks_sms_settings'
+    );
     register_setting( 'general', 'weblooks_sms_sessionkey' );
     register_setting( 'general', 'weblooks_sms_session' );
     register_setting( 'general', 'weblooks_sms_default_message' );
     register_setting( 'general', 'weblooks_sms_pending_message' );
     register_setting( 'general', 'weblooks_sms_processing_message' );
     register_setting( 'general', 'weblooks_sms_completed_message' );
+    register_setting( 'general', 'weblooks_sms_cancelled_message' );
 }
 add_action( 'admin_init', 'weblooks_sms_settings_init' );
 
@@ -106,6 +114,11 @@ function weblooks_sms_completed_message_callback() {
     echo '<textarea name="weblooks_sms_completed_message">' . $completed_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
+function weblooks_sms_cancelled_message_callback() {
+    $completed_message = get_option( 'weblooks_sms_cancelled_message' );
+    echo '<textarea name="weblooks_sms_cancelled_message">' . $cancelled_message . '</textarea>';
+    echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
+}
 function send_sms_on_order_status_change( $order_id, $old_status, $new_status ) {
     $sessionkey = get_option( 'weblooks_sms_sessionkey' );
     $session = get_option( 'weblooks_sms_session' );
@@ -126,7 +139,9 @@ function send_sms_on_order_status_change( $order_id, $old_status, $new_status ) 
         $message = get_option( 'weblooks_sms_processing_message' );
     } elseif ( $new_status === 'pending' ) {
         $message = get_option( 'weblooks_sms_pending_message' );
-    } else {
+    } elseif ( $new_status === 'cancelled' ) {
+        $message = get_option( 'weblooks_sms_cancelled_message' );
+    }else {
         $message = get_option( 'weblooks_sms_default_message' );
     }
 
