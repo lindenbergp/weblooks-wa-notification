@@ -93,30 +93,30 @@ function weblooks_sms_session_callback() {
 
 function weblooks_sms_default_message_callback() {
     $default_message = get_option( 'weblooks_sms_default_message' );
-    echo '<textarea name="weblooks_sms_default_message">' . $default_message . '</textarea>';
+    echo '<textarea name="weblooks_sms_default_message" style="width: 350px; height: 300px;">' . $default_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 
 function weblooks_sms_pending_message_callback() {
     $pending_message = get_option( 'weblooks_sms_pending_message' );
-    echo '<textarea name="weblooks_sms_pending_message">' . $pending_message . '</textarea>';
+    echo '<textarea name="weblooks_sms_pending_message" style="width: 350px; height: 300px;">' . $pending_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 
 function weblooks_sms_processing_message_callback() {
     $processing_message = get_option( 'weblooks_sms_processing_message' );
-    echo '<textarea name="weblooks_sms_processing_message">' . $processing_message . '</textarea>';
+    echo '<textarea name="weblooks_sms_processing_message" style="width: 350px; height: 300px;">' . $processing_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 
 function weblooks_sms_completed_message_callback() {
     $completed_message = get_option( 'weblooks_sms_completed_message' );
-    echo '<textarea name="weblooks_sms_completed_message">' . $completed_message . '</textarea>';
+    echo '<textarea name="weblooks_sms_completed_message" style="width: 350px; height: 300px;">' . $completed_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 function weblooks_sms_cancelled_message_callback() {
     $cancelled_message = get_option( 'weblooks_sms_cancelled_message' );
-    echo '<textarea name="weblooks_sms_cancelled_message">' . $cancelled_message . '</textarea>';
+    echo '<textarea name="weblooks_sms_cancelled_message" style="width: 350px; height: 300px;">' . $cancelled_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 function send_sms_on_order_status_change( $order_id, $old_status, $new_status ) {
