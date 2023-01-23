@@ -115,7 +115,7 @@ function weblooks_sms_completed_message_callback() {
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 function weblooks_sms_cancelled_message_callback() {
-    $completed_message = get_option( 'weblooks_sms_cancelled_message' );
+    $cancelled_message = get_option( 'weblooks_sms_cancelled_message' );
     echo '<textarea name="weblooks_sms_cancelled_message">' . $cancelled_message . '</textarea>';
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
