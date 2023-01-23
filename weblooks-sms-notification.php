@@ -13,7 +13,7 @@ License URI: https://github.com/lindenbergp/weblooks-wa-notification/blob/main/L
 function weblooks_sms_settings_init() {
     add_settings_section(
         'weblooks_sms_settings',
-        'Configurações de SMS Weblooks',
+        'Configurações de Weblooks WA Notificatio',
         'weblooks_sms_settings_callback',
         'general'
     );
