@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Weblooks WA Notification
+Plugin Name: W-API Weblooks Notification
 Plugin URI: https://github.com/lindenbergp/weblooks-wa-notification
 Description: Envia uma notificação SMS para o cliente quando o status do pedido é atualizado.
-Version: 1.1.2
+Version: 1.1.21
 Author: Weblooks
 Author URI: https://weblooks.com.br
 License: GPL2
@@ -19,7 +19,7 @@ function weblooks_sms_settings_init() {
     );
     add_settings_field(
         'weblooks_sms_sessionkey',
-        'Sessionkey',
+        'apikey',
         'weblooks_sms_sessionkey_callback',
         'general',
         'weblooks_sms_settings'
@@ -153,16 +153,20 @@ function send_sms_on_order_status_change( $order_id, $old_status, $new_status ) 
     $message = str_replace( '[order_total]', $order_total, $message );
     $telefone = preg_replace("/[^0-9]/", "", $order->get_billing_phone());
     $telefone = "55" . $telefone;
-    $api_url = "https://api.weblooks.com.br/sendText";
+    $api_url = "https://wapi.weblooks.com.br/message/sendText/${session}";
 
     $headers = array(
-        'sessionkey' => $sessionkey,
+        'apikey' => $sessionkey,
         'Content-Type' => 'application/json'
     );
     $data = array(
-        "session" => $session,
         "number" => $telefone,
-        "text" => $message
+        "options" => array(
+            'delay'=> 1200
+        ),
+          "textMessage" => array(
+            'text'=> $message
+          )
     );
     $options = array(
         'headers' => $headers,
