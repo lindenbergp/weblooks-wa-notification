@@ -8,10 +8,10 @@
 <p>Envia uma notificação WA via API para o cliente quando o status do pedido é atualizado no Woo.</p>
 Mande uma mensagem para o cliente quando seu pedido mudar de status.
 Status Disponiveis;
-- Pendente
-* Processando
-+ Concluído
-- Cancelado
+-Pendente
+-Processando
+-Concluído
+-Cancelado
 
 E possivel usar os shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem.
 Atualmente funciona com as API Codechat e Evolution.
