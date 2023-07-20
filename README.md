@@ -8,7 +8,7 @@
 <p>Envia uma notificação WA via API para o cliente quando o status do pedido é atualizado no Woo.</p>
 Mande uma mensagem para o cliente quando seu pedido mudar de status.<br />
 
-##Status Disponiveis;<br />
+<h3>Status Disponiveis</h3>;<br />
 -Pendente<br />
 -Processando<br />
 -Concluído<br />
