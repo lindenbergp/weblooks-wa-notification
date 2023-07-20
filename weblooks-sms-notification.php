@@ -3,7 +3,7 @@
 Plugin Name: W-API Weblooks Notification
 Plugin URI: https://github.com/lindenbergp/weblooks-wa-notification
 Description: Envia uma notificação SMS para o cliente quando o status do pedido é atualizado.
-Version: 1.1.21
+Version: 1.1.27
 Author: Weblooks
 Author URI: https://weblooks.com.br
 License: GPL2
@@ -16,6 +16,13 @@ function weblooks_sms_settings_init() {
         'Configurações de Weblooks WA Notificatio',
         'weblooks_sms_settings_callback',
         'general'
+    );
+    add_settings_field(
+        'weblooks_sms_urlapi',
+        'Url Api',
+        'weblooks_sms_urlapi_callback',
+        'general',
+        'weblooks_sms_settings'
     );
     add_settings_field(
         'weblooks_sms_sessionkey',
@@ -66,6 +73,7 @@ function weblooks_sms_settings_init() {
         'general',
         'weblooks_sms_settings'
     );
+    register_setting( 'general', 'weblooks_sms_urlapi' );
     register_setting( 'general', 'weblooks_sms_sessionkey' );
     register_setting( 'general', 'weblooks_sms_session' );
     register_setting( 'general', 'weblooks_sms_default_message' );
@@ -79,6 +87,11 @@ add_action( 'admin_init', 'weblooks_sms_settings_init' );
 function weblooks_sms_settings_callback() {
     echo '<p>Insira suas credenciais da Weblooks SMS e personalize as mensagens de SMS enviadas aos clientes.</p>';
     echo '<p>Shortcodes disponíveis: [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total]</p>';
+}
+
+function weblooks_sms_urlapi_callback() {
+    $urlapi = get_option( 'weblooks_sms_urlapi' );
+    echo '<input type="text" name="weblooks_sms_urlapi" value="' . $urlapi . '" />';
 }
 
 function weblooks_sms_sessionkey_callback() {
@@ -120,6 +133,7 @@ function weblooks_sms_cancelled_message_callback() {
     echo '<p>Use shortcodes [customer_name], [order_id], [order_status], [payment_method], [order_items], [order_total] para incluir os dados do cliente e do pedido na mensagem</p>';
 }
 function send_sms_on_order_status_change( $order_id, $old_status, $new_status ) {
+    $urlapi = get_option( 'weblooks_sms_urlapi' );
     $sessionkey = get_option( 'weblooks_sms_sessionkey' );
     $session = get_option( 'weblooks_sms_session' );
     $order = wc_get_order( $order_id );
@@ -153,7 +167,7 @@ function send_sms_on_order_status_change( $order_id, $old_status, $new_status ) 
     $message = str_replace( '[order_total]', $order_total, $message );
     $telefone = preg_replace("/[^0-9]/", "", $order->get_billing_phone());
     $telefone = "55" . $telefone;
-    $api_url = "https://wapi.weblooks.com.br/message/sendText/${session}";
+    $api_url = "${urlapi}/message/sendText/${session}";
 
     $headers = array(
         'apikey' => $sessionkey,
