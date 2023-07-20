@@ -6,6 +6,8 @@ Description: Envia uma notificação SMS para o cliente quando o status do pedid
 Version: 1.1.27
 Author: Weblooks
 Author URI: https://weblooks.com.br
+Requires at least: 5.0
+Tested up to: 6.2.2
 License: GPL2
 License URI: https://github.com/lindenbergp/weblooks-wa-notification/blob/main/LICENSE
 */
